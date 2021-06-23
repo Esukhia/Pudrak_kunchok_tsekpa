@@ -41,23 +41,22 @@ def get_pages(vol_text):
             pg_text = ""
     return result
 
-def save_pagewise(target_pudrak_hfml, vol_num):
-    target_name = "google"
+def save_pagewise(target_pudrak_hfml, vol_num, target_name):
     vol_path = Path(f'./{target_name}_trans_pudrak/{vol_num}/').mkdir(parents=True, exist_ok=True)
     pages = get_pages(target_pudrak_hfml)
     for pg_num, page in enumerate(pages, 1):
         Path(f'./{target_name}_trans_pudrak/{vol_num}/{pg_num}.txt').write_text(page, encoding="utf-8")
 
 
-def pipeline(target_paths, source_paths):
+def pipeline(target_paths, source_paths, target_name):
     for target_path, source_path in zip(target_paths, source_paths):
         print(f'INFO: {source_path.stem} tranfering line break to {target_path.stem}..')
         target_hfml = target_path.read_text(encoding='utf-8')
         source_hfml = source_path.read_text(encoding='utf-8')
         source_hfml = preprocessing_pudrak(source_hfml)
         target_pudrak_hfml = transfer_pg_br(target_hfml, source_hfml)
-        save_pagewise(target_pudrak_hfml, target_path.stem)
-        Path(f'./google_trans_pudrak/{source_path.stem}.txt').write_text(target_pudrak_hfml, encoding='utf-8')
+        save_pagewise(target_pudrak_hfml, target_path.stem, target_name)
+        Path(f'./{target_name}_trans_pudrak/{source_path.stem}.txt').write_text(target_pudrak_hfml, encoding='utf-8')
         print(f'INFO: {source_path.stem} completed..')
 
 if __name__ == "__main__":
@@ -74,10 +73,12 @@ if __name__ == "__main__":
     #     Path(f'./derge_pudrak/{pudrak_hfml_path.stem}.txt').write_text(derge_pudrak_hfml, encoding='utf-8')
     #     print(f'INFO: {pudrak_hfml_path.stem} completed..')
     
-    google_hfml_paths = list(Path('./pudrak_google').iterdir())
-    google_hfml_paths.sort()
+    # google_hfml_paths = list(Path('./pudrak_google').iterdir())
+    derge_hfml_paths = list(Path('./derge_vol').iterdir())
+    derge_hfml_paths.sort()
     pudrak_hfml_paths = list(Path('./pudrak_trans').iterdir())
     pudrak_hfml_paths.sort()
-    pipeline(google_hfml_paths, pudrak_hfml_paths)
+    target_name = "derge"
+    pipeline(derge_hfml_paths, pudrak_hfml_paths, target_name)
     
 
