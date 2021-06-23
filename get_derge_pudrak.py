@@ -49,7 +49,7 @@ def save_pagewise(target_pudrak_hfml, vol_num, target_name):
 
 
 def pipeline(target_paths, source_paths, target_name):
-    for target_path, source_path in zip(target_paths, source_paths):
+    for target_path, source_path in zip(target_paths[1:], source_paths[1:]):
         print(f'INFO: {source_path.stem} tranfering line break to {target_path.stem}..')
         target_hfml = target_path.read_text(encoding='utf-8')
         source_hfml = source_path.read_text(encoding='utf-8')
