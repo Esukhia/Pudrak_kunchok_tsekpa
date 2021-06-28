@@ -1,4 +1,3 @@
-import logging
 import re
 from antx import transfer
 from pathlib import Path
@@ -41,11 +40,17 @@ def get_pages(vol_text):
             pg_text = ""
     return result
 
+def clean_page(pg_text):
+    pg_text = re.sub(r"\[([𰵀-󴉱])?[0-9]+[a-z]{1}\].*","", pg_text)
+    pg_text = pg_text.strip()
+    return pg_text
+
 def save_pagewise(target_pudrak_hfml, vol_num, target_name):
-    vol_path = Path(f'./{target_name}_trans_pudrak/{vol_num}/').mkdir(parents=True, exist_ok=True)
+    vol_path = Path(f'./{target_name}/{vol_num}/').mkdir(parents=True, exist_ok=True)
     pages = get_pages(target_pudrak_hfml)
     for pg_num, page in enumerate(pages, 1):
-        Path(f'./{target_name}_trans_pudrak/{vol_num}/{pg_num:04}.txt').write_text(page, encoding="utf-8")
+        pg_text = clean_page(page)
+        Path(f'./{target_name}/{vol_num}/{pg_num:04}.txt').write_text(pg_text, encoding="utf-8")
 
 
 def pipeline(target_paths, source_paths, target_name):
@@ -81,9 +86,9 @@ if __name__ == "__main__":
     # target_name = "derge"
     # pipeline(derge_hfml_paths, pudrak_hfml_paths, target_name)
     
-    hfml_paths = list(Path('./derge_trans_pudrak').iterdir())
+    hfml_paths = list(Path('./google_trans_pudrak').iterdir())
     hfml_paths.sort()
-    target_name = "derge"
+    target_name = "google_trans_pudrak"
     for hfml_path in hfml_paths:
         hfml = hfml_path.read_text(encoding='utf-8')
         save_pagewise(hfml, hfml_path.stem, target_name)
