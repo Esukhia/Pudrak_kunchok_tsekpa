@@ -86,11 +86,12 @@ if __name__ == "__main__":
     # target_name = "derge"
     # pipeline(derge_hfml_paths, pudrak_hfml_paths, target_name)
     
-    hfml_paths = list(Path('./trans_derge').iterdir())
-    hfml_paths.sort()
-    target_name = "trans_derge"
-    for hfml_path in hfml_paths:
-        hfml = hfml_path.read_text(encoding='utf-8')
-        save_pagewise(hfml, hfml_path.stem, target_name)
+    # hfml_paths = list(Path('./trans_derge').iterdir())
+    # hfml_paths.sort()
+    target_name = "trans"
+    # for hfml_path in hfml_paths:
+    hfml_path = Path(f'./{target_name}/v049.txt')
+    hfml = hfml_path.read_text(encoding='utf-8')
+    save_pagewise(hfml, hfml_path.stem, target_name)
 
 
