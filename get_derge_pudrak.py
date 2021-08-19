@@ -90,7 +90,7 @@ if __name__ == "__main__":
     # hfml_paths.sort()
     target_name = "trans"
     # for hfml_path in hfml_paths:
-    hfml_path = Path(f'./{target_name}/v049.txt')
+    hfml_path = Path(f'./{target_name}/v050.txt')
     hfml = hfml_path.read_text(encoding='utf-8')
     save_pagewise(hfml, hfml_path.stem, target_name)
 
