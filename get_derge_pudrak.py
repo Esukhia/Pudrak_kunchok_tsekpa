@@ -71,27 +71,18 @@ if __name__ == "__main__":
     # pudrak_hfml_paths.sort()
     # for derge_hfml_path, pudrak_hfml_path in zip(derge_hfml_paths, pudrak_hfml_paths):
     #     print(f'INFO: {pudrak_hfml_path.stem} tranfering line break to {derge_hfml_path.stem}..')
-    #     derge_hfml = derge_hfml_path.read_text(encoding='utf-8')
-    #     pudrak_hfml = pudrak_hfml_path.read_text(encoding='utf-8')
-    #     pudrak_hfml = preprocessing_pudrak(pudrak_hfml)
-    #     derge_pudrak_hfml = transfer_pg_br(derge_hfml, pudrak_hfml)
-    #     Path(f'./derge_pudrak/{pudrak_hfml_path.stem}.txt').write_text(derge_pudrak_hfml, encoding='utf-8')
-    #     print(f'INFO: {pudrak_hfml_path.stem} completed..')
+        # derge_hfml = derge_hfml_path.read_text(encoding='utf-8')
+        # pudrak_hfml = pudrak_hfml_path.read_text(encoding='utf-8')
+        # pudrak_hfml = preprocessing_pudrak(pudrak_hfml)
+        # derge_pudrak_hfml = transfer_pg_br(derge_hfml, pudrak_hfml)
+        # Path(f'./trans_derge/{pudrak_hfml_path.stem}.txt').write_text(derge_pudrak_hfml, encoding='utf-8')
+        # print(f'INFO: {pudrak_hfml_path.stem} completed..')
     
-    # google_hfml_paths = list(Path('./pudrak_google').iterdir())
-    # derge_hfml_paths = list(Path('./derge_vol').iterdir())
-    # derge_hfml_paths.sort()
-    # pudrak_hfml_paths = list(Path('./pudrak_trans').iterdir())
-    # pudrak_hfml_paths.sort()
-    # target_name = "derge"
-    # pipeline(derge_hfml_paths, pudrak_hfml_paths, target_name)
     
     # hfml_paths = list(Path('./trans_derge').iterdir())
     # hfml_paths.sort()
-    target_name = "trans"
-    # for hfml_path in hfml_paths:
-    hfml_path = Path(f'./{target_name}/v050.txt')
+    target_name = "trans_google"
+    # # for hfml_path in hfml_paths:
+    hfml_path = Path(f'./{target_name}/v047.txt')
     hfml = hfml_path.read_text(encoding='utf-8')
     save_pagewise(hfml, hfml_path.stem, target_name)
-
-
